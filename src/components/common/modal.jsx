@@ -8,14 +8,10 @@ class Modal extends Component {
 	handleChange = e => {
 		this.setState({ value: e.currentTarget.value });
 	}
-	setValue = (budget) => {
-		this.setState({ value: budget });
-	}
+
 	render() {
 		const { data, onSubmit, openModal, closeModal } = this.props;
 		const { budget, name } = data;
-		
-		this.setValue(budget);
 
 		if(!openModal) return null;
 		return (
