@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import Header from './components/common/header';
 import Footer from './components/common/footer';
 import Firms from './components/firmsList';
-import { getFirms } from './services/fakeApiService';
 import "bootswatch/dist/sandstone/bootstrap.min.css";
 import './App.css';
 

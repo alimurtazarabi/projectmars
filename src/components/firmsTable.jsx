@@ -19,11 +19,13 @@ const FirmsTable = ({ data, openModal }) => {
 	return (
 		<table className="table table-hover">
 			<thead>
-				<th scope="col">Company Name</th>
-      			<th scope="col">Budget</th>
-      			<th scope="col">Spent</th>
-      			<th scope="col">Date of First Purchase </th>
-      			<th> Remaining Budget </th>
+				<tr>
+					<th scope="col">Company Name</th>
+	      			<th scope="col">Budget</th>
+	      			<th scope="col">Spent</th>
+	      			<th scope="col">Date of First Purchase </th>
+	      			<th> Remaining Budget </th>
+      			</tr>
 			</thead>
 			<tbody>
 				{

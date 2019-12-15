@@ -9,8 +9,8 @@ class Firms extends Component {
 		openModal: false,
 		modalItem: []
 	}
-	handleSubmit = (event) => {
-		// event.preventDefault();
+	handleSubmit = (e) => {
+		e.preventDefault();
 		console.log('hogya');
 	}
 	openModal = (id) => {
@@ -37,7 +37,7 @@ class Firms extends Component {
 				/>
 				<Modal 
 					data={modalItem} 
-					handleSubmit={this.handleSubmit}
+					onSubmit={this.handleSubmit}
 					openModal={openModal}
 					closeModal={this.closeModal}
 				/>
