@@ -1,3 +1,29 @@
 body {
   padding: 0.5%;
 }
+
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1050;
+    width: 50%;
+    overflow: hidden;
+}
+.backdrop {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0,0,0,0.9);
+      z-index: 1050;
+}
+.table .table-active {
+	cursor: pointer;
+}
+.list-group-item { background-color: transparent; }
+button:disabled {
+  cursor: not-allowed;
+}

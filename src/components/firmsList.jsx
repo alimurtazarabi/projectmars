@@ -1,25 +1,44 @@
 import React, { Component, Fragment } from 'react';
-import FirmsTable from './firmsTable';
+import Table from './table';
 import Modal from './common/modal';
+import TaskOne from './taskOne';
 import { getFirms } from '../services/fakeApiService';
 
 class Firms extends Component {
 	state = {
 		firms: [],
-		openModal: false,
-		modalItem: []
+		isModalOpen: false,
+		modalItem: [],
 	}
-	handleSubmit = (e) => {
-		e.preventDefault();
-		console.log('hogya');
-	}
-	openModal = (id) => {
+
+	getTheFirm = (id) => {
 		const { firms } = this.state;
 		const selectedFirm = firms.find(item => item.id === id);
-		this.setState({ modalItem: selectedFirm, openModal: true });
+		return selectedFirm;
 	}
+
+	handleSubmit = (e, id, value) => {
+		e.preventDefault();
+		const result = window.confirm('Please Confirm....!!!');
+		if(!result) return;
+		this.closeModal();
+		this.doSubmit(id, value);
+	}
+
+	doSubmit = (id, value) => {
+		const tempFirms = [ ...this.state.firms];
+		const index = tempFirms.indexOf(this.getTheFirm(id));
+		const firm = tempFirms[index];
+		console.log(value); 
+	}
+
+	openModal = (id) => {
+		const selectedFirm = this.getTheFirm(id);
+		this.setState({ modalItem: selectedFirm, isModalOpen: true });
+	}
+
 	closeModal = () => {
-		this.setState({ openModal: false});
+		this.setState({ isModalOpen: false, modalItem: ''});
 	}
 
 	async componentDidMount() {
@@ -28,19 +47,23 @@ class Firms extends Component {
 	}
 
 	render() {
-		const { firms, modalItem, openModal } = this.state;
+		const { firms, modalItem, isModalOpen } = this.state;
 		return (
 			<Fragment>
-				<FirmsTable 
+				<Table
 					data={firms} 
 					openModal={this.openModal}
 				/>
-				<Modal 
-					data={modalItem} 
-					onSubmit={this.handleSubmit}
-					openModal={openModal}
-					closeModal={this.closeModal}
-				/>
+				{
+					isModalOpen && 
+						<Modal 
+							data={modalItem} 
+							onSubmit={this.handleSubmit}
+							// isModalOpen={isModalOpen}
+							closeModal={this.closeModal}
+						/>
+				}
+				<TaskOne />
 			</Fragment>
 		);
 	}

@@ -1,39 +1,48 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { number } from 'yup';
 
-class Modal extends Component {
-	state = {
-		value: ''
+
+
+const Modal = ({ data, onSubmit, isModalOpen, closeModal }) => {
+// Declare the schema
+const schema =  number().required().positive().integer().min(data.budget_spent)
+	
+	const [input, setInput] = useState(data.budget);
+	const [isValid, setIsValid] = useState(true)
+
+	useEffect(() => {
+		schema.isValid(input)
+			.then((isValid) => setIsValid(isValid))
+	}, [input])
+
+
+	const handleChange = event => {
+ 		setInput(event.currentTarget.value);
 	}
 
-	handleChange = e => {
-		this.setState({ value: e.currentTarget.value });
-	}
-
-	render() {
-		const { data, onSubmit, openModal, closeModal } = this.props;
-		const { budget, name } = data;
-
-		if(!openModal) return null;
-		return (
-			<div className="card text-white bg-primary mb-3">
-			  <div className="card-header">{ name }</div>
+	return (
+		<div className="backdrop">
+			<div className="card border-primary mb-3">
+			  <div className="card-header">{ data.name }</div>
 			  <div className="card-body">
-			    <form onSubmit={(e) => onSubmit(e)}>
+			    <form onSubmit={(e, id) => onSubmit(e, data.id)}>
 		    		<div className="form-group">
 					  <input 
-					  	type="text" 
+					  	type="text"
+					  	name="validateIt" 
 					  	className="form-control"
-					  	value={this.state.value} 
-					  	onChange={this.handleChange} 
+					  	value={input} 
+					  	onChange={event => handleChange(event)} 
 					  />
 					</div>
 					<button 
+						disabled={!isValid}
 						type="submit"
 						className="btn btn-secondary">
 						update
 					</button>
 					<button 
-						type="button"
+						type="submit"
 						onClick={(e) => closeModal()}
 						className="btn btn-danger mx-2">
 						close
@@ -41,47 +50,8 @@ class Modal extends Component {
 			    </form>
 			  </div>
 			</div>
-		);
-	}
+		</div>
+	)
 }
 
 export default Modal;
-
-
-// const Modal = ({ data, onSubmit, openModal, closeModal }) => {
-// 	const budget = data.budget;
-// 	const [input, setInput] = useState(budget);
-
-// 	if(!openModal) return null;
-
-// 	return (
-// 		<div className="card text-white bg-primary mb-3">
-// 		  <div className="card-header">{ data.name }</div>
-// 		  <div className="card-body">
-// 		    <form onSubmit={(e) => onSubmit(e)}>
-// 	    		<div className="form-group">
-// 				  <input 
-// 				  	type="text" 
-// 				  	className="form-control"
-// 				  	value={input} 
-// 				  	onChange={(e) => setInput(e.target.value)} 
-// 				  />
-// 				</div>
-// 				<button 
-// 					type="submit"
-// 					className="btn btn-secondary">
-// 					update
-// 				</button>
-// 				<button 
-// 					type="button"
-// 					onClick={(e) => closeModal()}
-// 					className="btn btn-danger mx-2">
-// 					close
-// 				</button>
-// 		    </form>
-// 		  </div>
-// 		</div>
-// 	)
-// }
-
-// export default Modal;

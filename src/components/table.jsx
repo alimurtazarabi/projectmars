@@ -1,30 +1,18 @@
 import React from 'react';
+import { getFormattedValue } from '../utils/formatevalue';
+import {remainingBudget } from '../utils/remainingbudget';
 
-const FirmsTable = ({ data, openModal }) => {
-
-	const remainingBudget = (budget, budget_spent) => ( budget - budget_spent );
-	const getFormattedValue = (value) => {
-		return ( 
-			value
-			.toLocaleString('de-DE', 
-				{
-					style: 'currency',
-					currency: 'EUR',
-					minimumFractionDigits: 2 
-				}
-			)
-		);
-	};
+const Table = ({ data, openModal }) => {
 
 	return (
 		<table className="table table-hover">
 			<thead>
 				<tr>
-					<th scope="col">Company Name</th>
-	      			<th scope="col">Budget</th>
-	      			<th scope="col">Spent</th>
-	      			<th scope="col">Date of First Purchase </th>
-	      			<th> Remaining Budget </th>
+					<th>Company Name</th>
+	      			<th>Budget</th>
+	      			<th>Spent</th>
+	      			<th>Date of First Purchase </th>
+	      			<th>Budget Remaining</th>
       			</tr>
 			</thead>
 			<tbody>
@@ -49,4 +37,4 @@ const FirmsTable = ({ data, openModal }) => {
 	);
 }
 
-export default FirmsTable;
+export default Table;
