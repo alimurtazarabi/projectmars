@@ -17,19 +17,26 @@ class Firms extends Component {
 		return selectedFirm;
 	}
 
-	handleSubmit = (e, id, value) => {
+	handleSubmit = (e, id, input) => {
 		e.preventDefault();
 		const result = window.confirm('Please Confirm....!!!');
 		if(!result) return;
 		this.closeModal();
-		this.doSubmit(id, value);
+		this.doSubmit(id, input);
 	}
 
-	doSubmit = (id, value) => {
+	doSubmit = (id, input) => {
 		const tempFirms = [ ...this.state.firms];
+		// Method A - with this you dont have to use the getTheFirm function.
+		const updatedFirmList = tempFirms.map(firm => firm.id === id ? { ...firm, budget: input }: firm);
+		
+		// Method B
 		const index = tempFirms.indexOf(this.getTheFirm(id));
 		const firm = tempFirms[index];
-		console.log(value); 
+		const newFirmList = { firm, budget: input };
+
+		// set State 
+		this.setState({ firms: updatedFirmList });
 	}
 
 	openModal = (id) => {

@@ -20,17 +20,19 @@ const schema =  number().required().positive().integer().min(data.budget_spent)
  		setInput(event.currentTarget.value);
 	}
 
+	const validOrNot = (isValid) ? "is-valid" : "is-invalid"; 
+	
 	return (
 		<div className="backdrop">
 			<div className="card border-primary mb-3">
 			  <div className="card-header">{ data.name }</div>
 			  <div className="card-body">
-			    <form onSubmit={(e, id) => onSubmit(e, data.id)}>
+			    <form onSubmit={(e, id) => onSubmit(e, data.id, input)}>
 		    		<div className="form-group">
 					  <input 
-					  	type="text"
+					  	type="number"
 					  	name="validateIt" 
-					  	className="form-control"
+					  	className={`form-control + ${validOrNot}`}
 					  	value={input} 
 					  	onChange={event => handleChange(event)} 
 					  />
