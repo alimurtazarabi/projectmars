@@ -5,7 +5,7 @@ import {remainingBudget } from '../utils/remainingbudget';
 const Table = ({ data, openModal }) => {
 
 	return (
-		<table className="table table-hover table-responsive">
+		<table className="table table-hover table-responsive-md">
 			<thead>
 				<tr>
 					<th>Company Name</th>
