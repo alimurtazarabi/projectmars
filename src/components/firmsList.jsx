@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Table from './table';
 import Modal from './common/modal';
-import TaskOne from './taskOne';
 import { getFirms } from '../services/fakeApiService';
 
 class Firms extends Component {
@@ -70,7 +69,6 @@ class Firms extends Component {
 							closeModal={this.closeModal}
 						/>
 				}
-				<TaskOne />
 			</Fragment>
 		);
 	}
