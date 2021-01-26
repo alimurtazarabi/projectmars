@@ -12,8 +12,5 @@ To install the dependencies
 
 To see it running.
 
-### `Note`
-
->> for some reasons my `json-server` wasn't running, so i didn't mock the api, instead got the data from the variable.
 
 
